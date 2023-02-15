@@ -1,5 +1,25 @@
 #pragma once
+#include <exception>
 #include <cassert> // for assert()
+
+
+class bad_length : public std::exception
+{
+public:
+    virtual const char* what() const noexcept override
+    {
+        return "ERROR: bad lenght";
+    }
+};
+
+class bad_range : public std::exception
+{
+public:
+    virtual const char* what() const noexcept override
+    {
+        return "ERROR: bad range";
+    }
+};
 
 class IntArray
 {
@@ -35,6 +55,8 @@ public:
     void insertAtEnd(int value);
 
     int getLength() const;
+
+    void find_ell(int el);
 
 };
 

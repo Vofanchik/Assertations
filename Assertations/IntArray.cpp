@@ -1,10 +1,13 @@
 #include "IntArray.h"
+#include <iostream>
+
+
 
 IntArray::IntArray(int length) 
     : m_length{ length }
 {
-
-    assert(length >= 0);
+    if (length < 0) { throw bad_length(); }
+    //assert(length >= 0);
     if (length > 0)
         m_data = new int[length] {};
 }
@@ -36,7 +39,8 @@ void IntArray::erase()
 
 int& IntArray::operator[](int index)
 {
-    assert(index >= 0 && index < m_length);
+    if (!(index >= 0 && index < m_length)) { throw bad_range(); }
+    //assert(index >= 0 && index < m_length);
     return m_data[index];
 }
 
@@ -119,7 +123,8 @@ IntArray& IntArray::operator=(const IntArray& a)
 void IntArray::insertBefore(int value, int index)
 {
     // Sanity check our index value
-    assert(index >= 0 && index <= m_length);
+    if (!(index >= 0 && index < m_length)) { throw bad_range(); }
+    //assert(index >= 0 && index <= m_length);
 
     // First create a new array one element larger than the old array
     int* data{ new int[m_length + 1] };
@@ -144,7 +149,9 @@ void IntArray::insertBefore(int value, int index)
 void IntArray::remove(int index)
 {
     // Sanity check our index value
-    assert(index >= 0 && index < m_length);
+    if (!(index >= 0 && index < m_length)) { throw bad_range(); }
+    
+    //assert(index >= 0 && index < m_length);
 
     // If we're removing the last element in the array, we can just erase the array and return early
     if (m_length == 1)
@@ -175,4 +182,15 @@ void IntArray::insertAtBeginning(int value) { insertBefore(value, 0); }
 void IntArray::insertAtEnd(int value) { insertBefore(value, m_length); }
 
 int IntArray::getLength() const { return m_length; }
+
+void IntArray::find_ell(int el) {
+    for (int index=0; index < m_length; index++)
+    {
+        if (m_data[index] == el) { 
+            std::cout << "index element"<< index << std::endl;
+            return; }
+    }
+    std::cout << "no element" << std::endl;
+    return;
+}
 
