@@ -187,7 +187,7 @@ void IntArray::find_ell(int el) {
     for (int index=0; index < m_length; index++)
     {
         if (m_data[index] == el) { 
-            std::cout << "index element"<< index << std::endl;
+            std::cout << "index element "<< index << std::endl;
             return; }
     }
     std::cout << "no element" << std::endl;
